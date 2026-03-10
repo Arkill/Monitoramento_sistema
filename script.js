@@ -67,6 +67,31 @@ function setStatusOffline() {
     el.className   = "status-erro";
 }
 
+/* ================================================================
+   AUTO-RELOAD  (padrão: 10 minutos sem resposta)
+   ================================================================ */
+const RELOAD_SEGUNDOS = 10 * 60;
+let reloadTimer    = RELOAD_SEGUNDOS;
+let reloadInterval = null;
+
+function resetarContadorReload() {
+    reloadTimer = RELOAD_SEGUNDOS;
+}
+
+function iniciarAutoReload() {
+    if (reloadInterval) clearInterval(reloadInterval);
+
+    reloadInterval = setInterval(() => {
+        reloadTimer--;
+
+        const min = String(Math.floor(reloadTimer / 60)).padStart(2, "0");
+        const sec = String(reloadTimer % 60).padStart(2, "0");
+        const el  = document.getElementById("reload-countdown");
+        if (el) el.textContent = `${min}:${sec}`;
+
+        if (reloadTimer <= 0) location.reload();
+    }, 1000);
+}
 
 /* ================================================================
    CARD OFFLINE / ONLINE
