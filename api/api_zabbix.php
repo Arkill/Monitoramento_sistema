@@ -5,17 +5,23 @@ set_time_limit(30);
 
 $url = "https://monitoramento.digiboard.com.br/zabbix/api_jsonrpc.php";
 
-$token = "45d10d2cea8640b120cd09a1f326e0a6";
+$token = "f3b9aef308176c9a34df8475b7d04d49fbc9015ab2a6c6675ed7478cb576ac8a";
 
 
 $servidores = [
 
-    "10760", // SRVDGB008
-    "10749", // SRVDGB023
-    "10750", // SRVDGB029
-    "10655", // SRVDGB003
-    "10775", // SRVDGB024
-    "10887"  // SRVDGB082
+    "10736", // SRVLDD2020
+    "10832", // SRVDGB088 - DB SISTEMAS
+    // FALTA DEPOIS COLOCO
+    // FALTA DEPOIS COLOCO
+    "10864", // INSTITUTO JC
+    "10655", // SRVDGB003 - NGINX CTD
+    "10750", // SRVDGB029 - 147.1.160.40
+    "10749", // SRVDGB023 - PDA 147.0.0.130
+    "10760", // SRVDGB008 - 147.1.0.116
+    "10743", // SRVDGB026 - SCRPSERVER-CELULAR 147.1.0.149
+    "10742", // SRVDGB025
+    "10751" //  SRVDGB028 - SFCSWEB2 
 
 ];
 
@@ -26,7 +32,7 @@ $data = [
     "jsonrpc" => "2.0",
     "method" => "item.get",
     "params" => [
-        "output" => ["lastvalue", "key_", "hostid"],
+        "output" => ["lastvalue", "key_", "hostid", "itemid"],
         "hostids" => $servidores,
         "search" => [
             "key_" => [
@@ -56,7 +62,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
 
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
