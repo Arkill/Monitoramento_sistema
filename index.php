@@ -429,7 +429,6 @@
   <span class="footer-sep"></span>
   <span id="status-conexao" class="status-ok">● ONLINE</span>
   <span class="footer-sep"></span>
-  <span>AUTO-RELOAD: <strong id="reload-countdown">10:00</strong></span>
 </footer>
 
 <script src="script.js"></script>
